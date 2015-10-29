@@ -24,6 +24,11 @@ However..
 ![]({{ site.url }}/images/8.png)
 ![]({{ site.url }}/images/9.png)
 
+The (graph-theoretical) thickness is now known for all complete graphs [1,
+2, 3, 12, 13], and is given by the following formula:
+
+![]({{ site.url }}/images/10.png)
+
 ## Conjecture
 There is known formula to be true for n at most 10 (see [G]). I believe it is also known to hold for n at most 12
 
