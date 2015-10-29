@@ -29,7 +29,6 @@ However..
 ![]({{ site.url }}/images/5.png)
 ![]({{ site.url }}/images/6.png)
 ![]({{ site.url }}/images/7.png)
-![]({{ site.url }}/images/8.png)
 ![]({{ site.url }}/images/9.png)
 
 The (graph-theoretical) thickness is now known for all complete graphs [1,
