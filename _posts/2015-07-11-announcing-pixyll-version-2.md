@@ -6,9 +6,9 @@ summary: overview
 
 # Definition
 
-_Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum number of crossings of its edges over all possible drawings of G   in the plane. For k⩾2, define the k-planar crossing number as..._
+_Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum number of crossings of its edges over all possible drawings of G in the plane. For k⩾2, define the k-planar crossing number as..._
 
-<p align="center" style=""><b>crk(G)=min{cr(G1)+cr(G2)+⋯+cr(Gk)}</b></p>
+<p align="center" style=""><b>crk(G)=min{cr(G1)+cr(G2)}</b></p>
 
 Trivally we have
 
