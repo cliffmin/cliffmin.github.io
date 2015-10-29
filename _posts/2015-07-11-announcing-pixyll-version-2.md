@@ -8,9 +8,17 @@ summary: overview
 
 _Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum number of crossings of its edges over all possible drawings of G in the plane. For k⩾2, define the k-planar crossing number as..._
 
-<p align="center" style=""><b>crk(G)=min{cr(G1)+cr(G2)}</b></p>
+![]({{ site.url }}/images/11.png)
 
-Trivally we have
+_where the minimum is taken over all unions G = G1 ∪ G2._
+
+_And let the thickness of the planar graphs G be expressed as..._
+
+![]({{ site.url }}/images/12.png)
+
+_where {G1,···,Gk} are planar._
+
+So from k, we trivally we have
 
 ![]({{ site.url }}/images/two.png)
 ![]({{ site.url }}/images/3.png)
@@ -21,7 +29,6 @@ However..
 ![]({{ site.url }}/images/5.png)
 ![]({{ site.url }}/images/6.png)
 ![]({{ site.url }}/images/7.png)
-![]({{ site.url }}/images/8.png)
 ![]({{ site.url }}/images/9.png)
 
 The (graph-theoretical) thickness is now known for all complete graphs [1,
@@ -29,9 +36,17 @@ The (graph-theoretical) thickness is now known for all complete graphs [1,
 
 ![]({{ site.url }}/images/10.png)
 
+From this, we can infer that any k with greater than 8 nodes, will have edge crossings in a biplanar graph. 
+
+## Core of the problem
+
+Applications have risiing relevance in a computer network, such a graph can be laid out on a circuit board so that communication channels do not cross, so no insulation is needed to avoid electrical shorts. 
+
+Despite the simple nature of the problem not much is known about this parameter. For example, neither the crossing number of the complete graph cr(Kn)
+
+
 ## Conjecture
-There is known formula to be true for n at most 10 (see [G]). I believe it is also known to hold for n at most 12
+There is known formula to be true for n ≤ 12 and is known to be an upper bound for general n.
 
 ![]({{ site.url }}/images/conjecture.png)
 
-This conjectured crossing number is known to be an upper bound. This is shown by exhibiting a drawing with the desired number of crossings.
