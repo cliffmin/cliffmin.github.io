@@ -36,9 +36,17 @@ The (graph-theoretical) thickness is now known for all complete graphs [1,
 
 ![]({{ site.url }}/images/10.png)
 
+From this, we can infer that any k with greater than 8 nodes, will have edge crossings in a biplanar graph. 
+
+## Core of the problem
+
+Applications have risiing relevance in a computer network, such a graph can be laid out on a circuit board so that communication channels do not cross, so no insulation is needed to avoid electrical shorts. 
+
+Despite the simple nature of the problem not much is known about this parameter. For example, neither the crossing number of the complete graph cr(Kn)
+
+
 ## Conjecture
-There is known formula to be true for n at most 10 (see [G]). I believe it is also known to hold for n at most 12
+There is known formula to be true for n ≤ 12 and is known to be an upper bound for general n.
 
 ![]({{ site.url }}/images/conjecture.png)
 
-This conjectured crossing number is known to be an upper bound. This is shown by exhibiting a drawing with the desired number of crossings.
