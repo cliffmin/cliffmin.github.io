@@ -10,14 +10,16 @@ _Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum nu
 
 ##crk(G)=min{cr(G1)+cr(G2)+⋯+cr(Gk)}*
 
-![]({{ site.url }}/images/one.png)
+Trivally we have
 ![]({{ site.url }}/images/two.png)
 ![]({{ site.url }}/images/3.png)
 ![]({{ site.url }}/images/4.png)
+However..
 ![]({{ site.url }}/images/5.png)
 ![]({{ site.url }}/images/6.png)
 ![]({{ site.url }}/images/7.png)
 ![]({{ site.url }}/images/8.png)
+![]({{ site.url }}/images/9.png)
 
 ## Conjecture
 > ![]({{ site.url }}/images/conjecture.png)
