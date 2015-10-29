@@ -8,14 +8,17 @@ summary: overview
 
 _Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum number of crossings of its edges over all possible drawings of G in the plane. For k⩾2, define the k-planar crossing number as..._
 
-<p align="center" style=""><b>crk(G)=min{cr(G1)+cr(G2)}</b></p>
 ![]({{ site.url }}/images/11.png)
+
+_where the minimum is taken over all unions G = G1 ∪ G2._
+
 _ And let the thickness of the planar graphs G be expressed as..._
+
 ![]({{ site.url }}/images/12.png)
 
+_where {G1,···,Gk} are planar._
 
-
-Trivally we have
+So from k, we trivally we have
 
 ![]({{ site.url }}/images/two.png)
 ![]({{ site.url }}/images/3.png)
