@@ -9,14 +9,14 @@ summary:    Overview and uses
 _A biplanar drawing of a graph G means partitioning the edge set of the graph into two
 graphs, G1 and G2, and drawing G1 and G2 in two disjoint planes._
 
-![_config.yml]({{ site.url }}/images/one.png =250x)
-![_config.yml]({{ site.url }}/images/two.png =250x)
-![_config.yml]({{ site.url }}/images/3.png =250x)
-![_config.yml]({{ site.url }}/images/4.png =250x)
-![_config.yml]({{ site.url }}/images/5.png =250x)
-![_config.yml]({{ site.url }}/images/6.png =250x)
-![_config.yml]({{ site.url }}/images/7.png =250x)
-![_config.yml]({{ site.url }}/images/8.png =250x)
+![]({{ site.url }}/images/one.png =250x)
+![]({{ site.url }}/images/two.png =250x)
+![]({{ site.url }}/images/3.png =250x)
+![]({{ site.url }}/images/4.png =250x)
+![]({{ site.url }}/images/5.png =250x)
+![]({{ site.url }}/images/6.png =250x)
+![]({{ site.url }}/images/7.png =250x)
+![]({{ site.url }}/images/8.png =250x)
 
 * Line anchors in code blocks and new syntax highlighting
 * A customizable variables file
