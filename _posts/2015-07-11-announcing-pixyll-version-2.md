@@ -4,9 +4,10 @@ title:      Biplanar Crossing Number
 summary:    Overview and uses
 ---
 
-In an effort to make Pixyll easier to customize and more aesthetically pleasing, we've release version `2.0`.
+## Definition
 
-Pixyll now features:
+_A biplanar drawing of a graph G means partitioning the edge set of the graph into two
+graphs, G1 and G2, and drawing G1 and G2 in two disjoint planes._
 
 * Line anchors in code blocks and new syntax highlighting
 * A customizable variables file
