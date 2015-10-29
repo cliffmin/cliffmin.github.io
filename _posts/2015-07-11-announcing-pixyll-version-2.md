@@ -44,9 +44,11 @@ Applications have risiing relevance in a computer network, such a graph can be l
 
 Despite the simple nature of the problem not much is known about this parameter. For example, neither the crossing number of the complete graph cr(Kn)
 
+## Current State
 
-## Conjecture
-There is known formula to be true for n ≤ 12 and is known to be an upper bound for general n.
+There is known conjecture to be held true for n ≤ 12 and is known to be an upper bound for general n, except for the special cases n = 6,7 where we find the upper bound. Saaty further verified that the upper bound is achieved for p ≤ 10 and Pan and Richter showed that it also is achieved for p = 11 and finally 12.
 
 ![]({{ site.url }}/images/conjecture.png)
+
+However, for an applicable amount of nodes, it remains elusive as to the asymptotic trend. 
 
