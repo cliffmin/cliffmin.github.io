@@ -12,7 +12,7 @@ _Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum nu
 
 _where the minimum is taken over all unions G = G1 ∪ G2._
 
-_ And let the thickness of the planar graphs G be expressed as..._
+_And let the thickness of the planar graphs G be expressed as..._
 
 ![]({{ site.url }}/images/12.png)
 
