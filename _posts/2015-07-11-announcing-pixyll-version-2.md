@@ -1,7 +1,6 @@
 ---
 layout:     post
 title:      Biplanar Crossing Number
-summary:    Overview and uses
 ---
 
 # Definition
