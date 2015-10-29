@@ -6,8 +6,9 @@ summary:    Overview and uses
 
 ## Definition
 
-_A biplanar drawing of a graph G means partitioning the edge set of the graph into two
-graphs, G1 and G2, and drawing G1 and G2 in two disjoint planes._
+_Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum number of crossings of its edges over all possible drawings of G   in the plane. For k⩾2, define the k-planar crossing number as_
+
+####crk(G)=min{cr(G1)+cr(G2)+⋯+cr(Gk)}
 
 ![]({{ site.url }}/images/one.png)
 ![]({{ site.url }}/images/two.png)
