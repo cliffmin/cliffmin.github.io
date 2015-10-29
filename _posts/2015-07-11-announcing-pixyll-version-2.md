@@ -4,21 +4,18 @@ title:      Biplanar Crossing Number
 summary:    Overview and uses
 ---
 
-## Definition
+# Definition
 
-_A biplanar drawing of a graph G means partitioning the edge set of the graph into two
-graphs, G1 and G2, and drawing G1 and G2 in two disjoint planes._
+_Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum number of crossings of its edges over all possible drawings of G   in the plane. For k⩾2, define the k-planar crossing number as_
 
-<img src="{{site.url}}/images/one.png" alt="Drawing" style="width: 400px; height: 300px"/> </br>
-<img src="{{site.url}}/images/two.png" alt="Drawing" style="width: 400px; height: 300px"/> </br>
-<img src="{{site.url}}/images/3.png" alt="Drawing" style="width: 400px; height: 300px"/> </br>
-<img src="{{site.url}}/images/4.png" alt="Drawing" style="width: 400px; height: 300px"/> </br>
-<img src="{{site.url}}/images/5.png" alt="Drawing" style="width: 400px; height: 300px"/> </br>
-<img src="{{site.url}}/images/6.png" alt="Drawing" style="width: 400px; height: 300px"/> </br>
-<img src="{{site.url}}/images/7.png" alt="Drawing" style="width: 400px; height: 300px"/> </br>
-<img src="{{site.url}}/images/8.png" alt="Drawing" style="width: 400px; height: 300px"/>
+> crk(G)=min{cr(G1)+cr(G2)+⋯+cr(Gk)} {: style="color:gray; font-size: 80%; text-align: center;"}
 
-* Line anchors in code blocks and new syntax highlighting
-* A customizable variables file
-* Modular, and lighter weight CSS
-* No more `max-width` media queries
+![]({{ site.url }}/images/one.png)
+![]({{ site.url }}/images/two.png)
+![]({{ site.url }}/images/3.png)
+![]({{ site.url }}/images/4.png)
+![]({{ site.url }}/images/5.png)
+![]({{ site.url }}/images/6.png)
+![]({{ site.url }}/images/7.png)
+![]({{ site.url }}/images/8.png)
+
