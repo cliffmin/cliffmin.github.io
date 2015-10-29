@@ -50,5 +50,7 @@ There is known conjecture to be held true for n ≤ 12 and is known to be an upp
 
 ![]({{ site.url }}/images/conjecture.png)
 
-However, for an applicable amount of nodes, it remains elusive as to the asymptotic trend. 
+However, for an applicable amount of nodes, it remains elusive as to the asymptotic trend and values are only known for n < 17.
+
+Research into a related field of rectilinear crossing numbers and it's relation to distributed systems are showing promise.
 
