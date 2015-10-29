@@ -9,8 +9,8 @@ summary:    Overview and uses
 _A biplanar drawing of a graph G means partitioning the edge set of the graph into two
 graphs, G1 and G2, and drawing G1 and G2 in two disjoint planes._
 
-![_config.yml]({{ site.url }}/images/1.png)
-![_config.yml]({{ site.url }}/images/2.png)
+![_config.yml]({{ site.url }}/images/one.png)
+![_config.yml]({{ site.url }}/images/two.png)
 ![_config.yml]({{ site.url }}/images/3.png)
 ![_config.yml]({{ site.url }}/images/4.png)
 ![_config.yml]({{ site.url }}/images/5.png)
