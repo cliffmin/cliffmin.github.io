@@ -140,9 +140,8 @@
 
 
     function clear() {
-
         d3.select("svg").remove();
-
+        $('.subcycles').remove();
     }
 
     function makeGraphNodes(matrix, matrixInput) {
@@ -447,7 +446,7 @@ $("#generate").click(function () {
             var addedGraphs = [];
 
             for (o = 0; o < splitMatrices.length; o++) {
-                var div = '<div id=graph' + o + '></div>';
+                var div = '<div id=graph' + o + ' class=subcycles></div>';
                 $("body").append(div)
 
                 addedGraphs.push(new myGraph("#graph" + o));
