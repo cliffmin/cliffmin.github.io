@@ -1,4 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
+<br>
 <script>
     function makeGraphNodesCycle(size) {
         var resultJson = {
