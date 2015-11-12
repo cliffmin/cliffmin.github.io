@@ -161,10 +161,7 @@
         //] };  
     }
 </script>
-</br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-</br>
-
 <script>
 $('#cycleSize').change(function () {
     var size = parseInt($("#cycleSize").val());
