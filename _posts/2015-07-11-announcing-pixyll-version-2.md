@@ -167,21 +167,7 @@
 </br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </br>
-<form id="form">Choose your Cn:
-    <select id='cycleSize'>
-        <option value="0">0</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-    </select>
-    <div id="cycles"></div>
-</form>
-<div id="generate">Generate</div>
-</br>
-<div style="width: 960px; height: 500px;" id="graph"><div>
-</br>
+
 <script>
 $('#cycleSize').change(function () {
     var size = parseInt($("#cycleSize").val());
@@ -463,3 +449,20 @@ $("#generate").click(function () {
     }(cycleSize, bundleBool, matrixInput))
 });
 </script>
+
+<form id="form">Choose your Cn:
+    <select id='cycleSize'>
+        <option value="0">0</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+    </select>
+    <div id="cycles"></div>
+</form>
+<div id="generate">Generate</div>
+</br>
+<div style="width: 960px; height: 500px;" id="graph"><div>
+</br>
+
