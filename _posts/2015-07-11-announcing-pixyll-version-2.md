@@ -1,7 +1,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
-
-</br>
-
 <script>
     function makeGraphNodesCycle(size) {
         var resultJson = {
@@ -449,7 +446,7 @@ $("#generate").click(function () {
     }(cycleSize, bundleBool, matrixInput))
 });
 </script>
-
+</br>
 <form id="form">Choose your Cn:
     <select id='cycleSize'>
         <option value="0">0</option>
@@ -462,7 +459,5 @@ $("#generate").click(function () {
     <div id="cycles"></div>
 </form>
 <div id="generate">Generate</div>
-</br>
 <div style="width: 960px; height: 500px;" id="graph"><div>
-</br>
 
