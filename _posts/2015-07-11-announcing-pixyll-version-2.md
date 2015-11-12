@@ -162,6 +162,7 @@
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<br>
 <form id="form">Choose your Cn:
     <select id='cycleSize'>
         <option value="0">0</option>
@@ -178,6 +179,8 @@
 <div style="width: 960px; height: 500px;" id="graph">
     <div>
         <div id="clear">Clear</div>
+        
+        <br>
 <script>
 $('#cycleSize').change(function () {
     var size = parseInt($("#cycleSize").val());
