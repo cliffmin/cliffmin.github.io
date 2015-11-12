@@ -1,4 +1,6 @@
+<br>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
+<br>
 <script>
     function makeGraphNodesCycle(size) {
         var resultJson = {
@@ -161,7 +163,9 @@
         //] };  
     }
 </script>
+<br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<br>
 <form id="form">Choose your Cn:
     <select id='cycleSize'>
         <option value="0">0</option>
@@ -189,7 +193,8 @@
     }
     $("#form #cycles").append('<input id="bundle" class="subcycles" type="checkbox">Bundle<br>');
 });
-
+<br>
+<script>
 $("#generate").click(function () {
     clear();
 
@@ -458,3 +463,4 @@ $("#generate").click(function () {
         }, 6000);
     }(cycleSize, bundleBool, matrixInput))
 });
+</script>
