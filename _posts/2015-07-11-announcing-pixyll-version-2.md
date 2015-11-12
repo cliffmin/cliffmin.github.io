@@ -1,56 +1,460 @@
----
-layout:     post
-title:      Biplanar Crossing Number
-summary: overview
----
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
+<script>
+    function makeGraphNodesCycle(size) {
+        var resultJson = {
+            nodes: [],
+            links: []
+        };
 
-# Definition
+        var n, i, j, x, y;
+        var matrix = [];
 
-_Let cr(G) denote the standard crossing number of a graph G, i.e. the minimum number of crossings of its edges over all possible drawings of G in the plane. For k⩾2, define the k-planar crossing number as..._
+        for (n = 0; n < size; n++) {
+            resultJson.nodes.push({
+                name: n + 1,
+                group: n
+            });
 
-![]({{ site.url }}/images/11.png)
+            matrix.push([]);
+            for (x = 0; x < size; x++) {
+                matrix[n].push(0);
+            }
+        }
 
-_where the minimum is taken over all unions G = G1 ∪ G2._
+        matrix[0][1] = 1;
+        matrix[0][size - 1] = 1;
+        matrix[size - 1][0] = 1;
+        matrix[size - 1][size - 2] = 1;
 
-_And let the thickness of the planar graphs G be expressed as..._
+        for (y = 1; y < size - 1; y++) {
+            matrix[y - 1][y + 1] = 1;
+        }
 
-![]({{ site.url }}/images/12.png)
+        for (i = 0; i < matrix.length; i++) {
+            for (j = 0; j < matrix.length; j++) {
+                if (matrix[i][j] === 1) {
+                    resultJson.links.push({
+                        source: i,
+                        target: j,
+                        value: 3
+                    })
+                }
+            }
+        }
+        return resultJson;
+    }
 
-_where {G1,···,Gk} are planar._
+    function getDropDownList(optionList) {
+        var combo = $("<select class='subcycles'></select>");
 
-So from k, we trivally we have
+        $.each(optionList, function(i, el) {
+            combo.append("<option>" + el + "</option>");
+        });
 
-![]({{ site.url }}/images/two.png)
-![]({{ site.url }}/images/3.png)
-![]({{ site.url }}/images/4.png)
+        $("#form #cycles").append(combo);
+    }
 
-However..
+    /** 
+     * Cn is an array of K-graphs [2,2,2] = k2,k2,k2
+     * The cycle size is the number of elements in Cn
+     *
+     * Note: comments referencing "original cycle" mean the 
+     * non-converted cycle of size N "old" vertices.
+     * The "transformed" cycle is the cycle that has each
+     * "new" vertex transformed to K graphs
+     */
+    function getMatrix(Cn) {
+        var matrix = [];
 
-![]({{ site.url }}/images/5.png)
-![]({{ site.url }}/images/6.png)
-![]({{ site.url }}/images/7.png)
-![]({{ site.url }}/images/9.png)
+        // count the number of vertices 
+        // (dont' just do cycle size * k size, we might have different k sizes at some point)
+        var totalCount = 0;
+        for (var i = 0; i < Cn.length; i++)
+        for (var j = 0; j < Cn[i]; j++)
+        totalCount++;
 
-The (graph-theoretical) thickness is now known for all complete graphs [1,
-2, 3, 12, 13], and is given by the following formula:
+        // we need to calculate a "new index" for each vertex in the original cycle
+        var newIndex = 0;
 
-![]({{ site.url }}/images/10.png)
+        // we know there are totalCount number of new vertices
+        for (var i = 0; i < totalCount; i++) {
 
-From this, we can infer that any k with greater than 8 nodes, will have edge crossings in a biplanar graph. 
+            // Cn[i] is the K graph size at this "old" vertex
+            for (var j = 0; j < Cn[i]; j++) {
 
-## Core of the problem
+                // initialize the matrix row
+                matrix[newIndex] = [];
 
-Applications have risiing relevance in a computer network, such a graph can be laid out on a circuit board so that communication channels do not cross, so no insulation is needed to avoid electrical shorts. 
+                // initialize all adjacencies to 0
+                for (var k = 0; k < totalCount; k++)
+                matrix[newIndex][k] = 0;
 
-Despite the simple nature of the problem not much is known about this parameter. For example, neither the crossing number of the complete graph cr(Kn)
+                // calculate the shift from [newIndex][0] for this grouping of adjacencies
+                var shift = (i - 1) * Cn[(i - 1 + Cn.length) % Cn.length];
+                shift = (shift + totalCount) % totalCount;
 
-## Current State
+                // put the shifted group into the matrix
+                for (var k = shift; k < shift + 3 * Cn[i]; k++) {
+                    var subidx = k % totalCount;
+                    if (subidx != newIndex) {
+                        matrix[newIndex][subidx] = 1;
+                    }
+                }
 
-There is known conjecture to be held true for n ≤ 12 and is known to be an upper bound for general n, except for the special cases n = 6,7 where we find the upper bound. Saaty further verified that the upper bound is achieved for p ≤ 10 and Pan and Richter showed that it also is achieved for p = 11 and finally 12.
+                // increment the next new index
+                newIndex++;
+            }
+        }
+        return matrix;
+    }
 
-![]({{ site.url }}/images/conjecture.png)
 
-However, for an applicable amount of nodes, it remains elusive as to the asymptotic trend and values are only known for n < 17.
 
-Research into a related field of rectilinear crossing numbers and it's relation to distributed systems are showing promise.
+    function clear() {
 
+        d3.select("svg").remove();
+
+    }
+
+    function makeGraphNodes(matrix, matrixInput) {
+        var resultJson = {
+            nodes: [],
+            links: []
+        };
+        var n, i, j, name, y, counter = 0,
+            linkValue;
+
+        for (n = 0; n < matrixInput.length; n++) {
+            for (y = 0; y < matrixInput[n]; y++) {
+                counter++;
+                resultJson.nodes.push({
+                    id: counter - 1,
+                    name: counter,
+                    group: n + 1
+                });
+            }
+        }
+
+        for (i = 0; i < matrix.length; i++) {
+            for (j = 0; j < matrix.length; j++) {
+                if (matrix[i][j] === 1) {
+                    if (resultJson.nodes[i].group === resultJson.nodes[j].group) {
+                        linkValue = 20;
+                    } else linkValue = 4;
+
+                    resultJson.links.push({
+                        source: i,
+                        target: j,
+                        value: linkValue
+                    })
+
+                }
+            }
+        }
+
+        return resultJson;
+        //{
+        //"nodes":[
+        //{"name":"node0","group":1},
+        //"links":[
+        //{"source":"node0","target":"node1","value":3}
+        //] };  
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<form id="form">Choose your Cn:
+    <select id='cycleSize'>
+        <option value="0">0</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+    </select>
+    <div id="cycles"></div>
+</form>
+<div id="generate">Generate</div>
+</br>
+<div style="width: 960px; height: 500px;" id="graph">
+    <div>
+        <div id="clear">Clear</div>
+        
+        $('#cycleSize').change(function () {
+    var size = parseInt($("#cycleSize").val());
+    $(".subcycles").remove();
+
+    $("#form #cycles").html("<p class='subcycles'>Select options: </p>");
+    for (var i = 0; i < size; i++) {
+        getDropDownList([2, 3, 4, 5]);
+    }
+    $("#form #cycles").append('<input id="bundle" class="subcycles" type="checkbox">Bundle<br>');
+});
+
+$("#generate").click(function () {
+    clear();
+
+    // get all the inputs into an array.
+    var $inputs = $('#form :input');
+
+    var matrixInput = [];
+    $inputs.each(function () {
+        matrixInput.push(parseInt($(this).val()));
+    });
+    var cycleSize = matrixInput.shift();
+    var bundleBool = matrixInput.pop();
+    bundleBool = $('#bundle').is(':checked');
+
+    (function (cycleSize, bundleBool, matrixInput) {
+        var width = 960,
+            height = 500;
+        var graph = makeGraphNodes(getMatrix(matrixInput), matrixInput);
+        var color = d3.scale.category20();
+
+        function myGraph(el) {
+            // Add and remove elements on the graph object
+            this.addNode = function (node) {
+                nodes.push({
+                    'id': node.id,
+                        'group': node.group
+                });
+                update();
+            }
+
+            this.removeNode = function (id) {
+                var i = 0;
+                var n = findNode(id);
+                while (i < links.length) {
+                    if ((links[i]['source'] === n) || (links[i]['target'] == n)) links.splice(i, 1);
+                    else i++;
+                }
+                var index = findNodeIndex(id);
+                if (index !== undefined) {
+                    nodes.splice(index, 1);
+                    update();
+                }
+            }
+
+            this.addLink = function (link) {
+                var sourceNode = findNode(link.source);
+                var targetNode = findNode(link.target);
+
+                if ((sourceNode !== undefined) && (targetNode !== undefined)) {
+                    links.push({
+                        "source": sourceNode,
+                            "target": targetNode,
+                            "value": link.value
+                    });
+                    update();
+                }
+            }
+
+
+            var findNode = function (id) {
+                for (var i = 0; i < nodes.length; i++) {
+                    if (nodes[i].id === id) return nodes[i]
+                };
+            }
+
+            var findNodeIndex = function (id) {
+                for (var i = 0; i < nodes.length; i++) {
+                    if (nodes[i].id === id) return i
+                };
+            }
+
+            // set up the D3 visualisation in the specified element
+            var w = $("#graph").innerWidth(),
+                h = $("#graph").innerHeight();
+
+            var vis = this.vis = d3.select(el).append("svg:svg")
+                .attr("width", w)
+                .attr("height", h);
+
+            var force = d3.layout.force()
+                .gravity(.05)
+                .linkDistance(function (d) {
+                if (bundleBool) return width / d.value;
+                else return width / 4;
+            })
+                .charge(-400)
+                .size([w, h]);
+
+            var nodes = force.nodes(),
+                links = force.links();
+
+            var update = function () {
+
+                var link = vis.selectAll("line.link")
+                    .data(links, function (d) {
+                    return d.source.id + "-" + d.target.id;
+                });
+
+                link.enter().insert("line")
+                    .attr("class", "link")
+                    .style("stroke-width", function (d) {
+                    return Math.sqrt(d.value);
+                });
+
+                link.exit().remove();
+
+                var node = vis.selectAll("g.node")
+                    .data(nodes, function (d) {
+                    return d.id;
+                });
+
+                var nodeEnter = node.enter().append("g")
+                    .attr("class", "node")
+                    .call(force.drag);
+
+                nodeEnter.append("text")
+                    .attr("class", "nodetext")
+                    .attr("dx", 12)
+                    .attr("dy", ".35em")
+                    .text(function (d) {
+                    return d.id
+                });
+
+                nodeEnter.append("circle")
+                    .attr("class", "node")
+                    .attr("r", 12)
+                    .style("fill", function (d) {
+                    return color(d.group);
+                })
+                    .call(force.drag);
+
+                node.exit().remove();
+
+                force.on("tick", function () {
+                    link.attr("x1", function (d) {
+                        return d.source.x;
+                    })
+                        .attr("y1", function (d) {
+                        return d.source.y;
+                    })
+                        .attr("x2", function (d) {
+                        return d.target.x;
+                    })
+                        .attr("y2", function (d) {
+                        return d.target.y;
+                    });
+
+                    node.attr("transform", function (d) {
+                        return "translate(" + d.x + "," + d.y + ")";
+                    });
+                });
+
+                // Restart the force layout.
+                force.start();
+            }
+
+            // Make it all go
+            update();
+        }
+        var includedNodes = new Array();
+        mygraph = new myGraph("#graph");
+        setTimeout(function () {
+
+            var i, j, y, n, counter = -1;
+            for (i = 0; i < cycleSize; i++) {
+                for (j = 0; j < matrixInput[i]; j++) {
+                    counter++;
+                }
+
+                mygraph.addNode(graph.nodes[counter]);
+                includedNodes.push(counter);
+            }
+            for (y = 0; y < graph.links.length; y++) {
+                if (includedNodes.indexOf(graph.links[y].source) >= 0 && includedNodes.indexOf(graph.links[y].target) >= 0) {
+                    mygraph.addLink(graph.links[y]);
+                }
+            }
+        }, 0);
+
+        setTimeout(function () {
+            var i, j, y, n, counter = 0,
+                x, newNodes = [];
+            for (i = 0; i < cycleSize; i++) {
+                for (j = 0; j < matrixInput[i]; j++) {
+                    counter++;
+                }
+            }
+
+            for (x = 0; x < counter; x++) {
+                if (includedNodes.indexOf(x) === -1) {
+                    mygraph.addNode(graph.nodes[x]);
+                    newNodes.push(x);
+                }
+            }
+
+            for (y = 0; y < graph.links.length; y++) {
+                if (newNodes.indexOf(graph.links[y].source) >= 0) {
+                    mygraph.addLink(graph.links[y]);
+                }
+            }
+        }, 3000);
+
+        setTimeout(function () {
+            function splitMatrix(matrix, ksize) {
+                var splits = [];
+                for (var i = 1; i <= ksize; i += 2) {
+
+                    // create a new copy of matrix as new split
+                    var split = [];
+                    for (var j = 0; j < matrix.length; j++) {
+                        split[j] = [];
+                        for (var k = 0; k < matrix[j].length; k++) {
+                            split[j][k] = matrix[j][k];
+                        }
+                    }
+
+                    // zero out the cross diagonal at this i size
+                    for (var x = 0; x < matrix.length; x++) {
+                        split[x][(x + i) % split[x].length] = 0;
+                        split[x][((x - i) + split[x].length) % split[x].length] = 0;
+                    }
+
+                    // track split
+                    splits.push(split);
+                }
+                return splits;
+            }
+
+            var i, j, counter = 0,
+                x, y, z, o;
+            for (i = 0; i < cycleSize; i++) {
+                for (j = 0; j < matrixInput[i]; j++) {
+                    counter++;
+                }
+            }
+
+            for (x = 0; x < counter; x++) {
+                mygraph.removeNode(x);
+            }
+
+            var splitMatrices = splitMatrix(getMatrix(matrixInput), matrixInput[0] + matrixInput[1]);
+
+            var graph = makeGraphNodes(splitMatrices[0], matrixInput);
+            var addedGraphs = [];
+
+            for (o = 0; o < splitMatrices.length; o++) {
+                var div = '<div id=graph' + o + '></div>';
+                $("body").append(div)
+
+                addedGraphs.push(new myGraph("#graph" + o));
+            }
+
+
+            var m, newGraph;
+            for (m = 0; m < addedGraphs.length; m++) {
+                newGraph = makeGraphNodes(splitMatrices[m], matrixInput);
+                for (y = 0; y < graph.nodes.length; y++) {
+                    addedGraphs[m].addNode(newGraph.nodes[y]);
+                }
+                for (z = 0; z < graph.links.length; z++) {
+                    addedGraphs[m].addLink(newGraph.links[z]);
+                }
+
+            }
+
+        }, 6000);
+    }(cycleSize, bundleBool, matrixInput))
+});
