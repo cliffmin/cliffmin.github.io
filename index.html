@@ -446,7 +446,7 @@ $("#generate").click(function () {
             var addedGraphs = [];
 
             for (o = 0; o < splitMatrices.length; o++) {
-                var div = '<div id=graph' + o + ' class=addedgraphs; width: 960px; height: 500px;></div>';
+                var div = '<div id=graph' + o + ' class=addedgraphs style="width: 960px; height: 500px;"></div>';
                 $("body").append(div)
 
                 addedGraphs.push(new myGraph("#graph" + o));
